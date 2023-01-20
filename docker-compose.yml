@@ -10,9 +10,16 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootpassword
     ports: 
-      - 9000:27017
+      - 27017
     volumes:
       - mongodb_data_container:/data/db
+  redis_server:
+    container_name: redis_server
+    image: redis/redis-stack-server:latest
+    expose:
+      - 6379
+    ports:
+      - "6379:6379"
   tracker_backend:
     container_name: tracker_backend
     build: 
@@ -23,10 +30,12 @@ services:
       ./.env
     environment:
       - NODE_ENV=production
+      - DATABASE_URL=
     ports:
       - 4000:4000
     depends_on:
       - tracker_db
+      - redis_server
 
 volumes:
   mongodb_data_container:

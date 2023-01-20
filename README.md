@@ -51,6 +51,15 @@ cp .env.sample .env
 docker compose up --build -d 
 open http://localhost:4000
 ```
+To run the frontend
+
+```
+git clone https://github.com/feyton/asset-tracker-fn.git
+cd asset-tracker-fn
+yarn
+yarn start
+open http://localhost:8000
+```
 
 #### Without docker
 > Be sure to have a MongoDB database hosted or running on your machine
@@ -64,6 +73,15 @@ yarn install
 yarn start
 open http://localhost:4000
 
+```
+To run the frontend
+
+```
+git clone https://github.com/feyton/asset-tracker-fn.git
+cd asset-tracker-fn
+yarn
+yarn start
+open http://localhost:8000
 ```
 
 
