@@ -1,0 +1,32 @@
+version: "3"
+
+
+services:
+  tracker_db:
+    container_name: tracker_db
+    restart: always
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports: 
+      - 9000:27017
+    volumes:
+      - mongodb_data_container:/data/db
+  tracker_backend:
+    container_name: tracker_backend
+    build: 
+      context: .
+    expose:
+      - 4000
+    env_file:
+      ./.env
+    environment:
+      - NODE_ENV=production
+    ports:
+      - 4000:4000
+    depends_on:
+      - tracker_db
+
+volumes:
+  mongodb_data_container:
